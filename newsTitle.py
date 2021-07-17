@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 def newsTitleCollection(type, pageNumber):
     category = [ "society", "politics", "economic", "culture", "sport", "digital"]
     daumNewsUrl = "https://news.daum.net/breakingnews/" + category[type] + "?page="
-    newsTitlePrecleaning = []
+    newsTitlePrecleaning = ""
 
     # category[tyoe]유형의 기사를 pageNumber페이지 까지 뉴스 제목 크롤링
     for num in range(1, pageNumber+1 ):
@@ -15,7 +15,6 @@ def newsTitleCollection(type, pageNumber):
         newsTitle = soup.select("#mArticle > div.box_etc > ul > li > div > strong > a")
 
         for i in range(len(newsTitle)):
-            newsTitlePrecleaning.append(newsTitle[i].text) 
-
-
-    print(newsTitlePrecleaning)
+            newsTitlePrecleaning = newsTitlePrecleaning + newsTitle[i].text
+            # newsTitlePrecleaning.append(newsTitle[i].text) 
+    return newsTitlePrecleaning
